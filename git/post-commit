@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Post commit hooks to spell check git commits
+# place into .git/hooks/post-commit and chmod +x
+
+# Check the log message
+MISTAKES=$(git log -1 | grep -e "^    "| aspell list)
+
+# Check comments in the content (anything being added after a #)
+MISTAKES=$(echo $MISTAKES ; git show | grep -e "^+.*#" | sed -e 's/+.*#//g' | aspell list)
+
+if [ -n "$MISTAKES" ] ; then
+    echo "****** SPELL CHECK FOUND SOMETHING ******"
+    echo $MISTAKES
+fi
