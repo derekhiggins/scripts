@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+for CONTAINER in "$(docker ps | awk '/^[0-9a-z]/ {print $1}')" ; do
+    docker inspect -format="{{.Name}} {{.NetworkSettings.IPAddress}}" $CONTAINER
+done
