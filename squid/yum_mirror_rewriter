@@ -1,0 +1,21 @@
+#!/bin/python
+
+# squid rewriter for fedora yum repositories, to avoid having to recache files
+# from multiple yum mirrors, place this in squid.conf
+# url_rewrite_program /path/to/yum_mirror_rewriter
+
+# Note : you should change the reference to the mirror below to point to something
+# local to you and reliable.
+
+import sys
+
+while True:
+    line = sys.stdin.readline().strip()
+
+    orig_url = line.split(' ')[0]
+    new_url = '\n'
+    if "/fedora/linux/" in orig_url:
+	    new_url = "http://ftp.heanet.ie/pub/fedora/linux/" + orig_url.split("/fedora/linux/")[-1] + "\n"
+
+    sys.stdout.write(new_url)
+    sys.stdout.flush()
