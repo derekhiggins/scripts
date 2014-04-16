@@ -1,8 +1,9 @@
 
 if [ -e /etc/redhat-release ] ; then
+    yum update -y
     yum install -y openssh-server git screen which python-virtualenv gcc libxml2-devel libxslt-devel tcpdump vim-enhanced
 elif [ -e /etc/debian_version ] ; then
-    apt-get install -y openssh-server git screen gcc libxml2-dev libxslt1-dev tcpdump vim gcc make zlib1g-dev curl libssl-dev
+    apt-get install -y  --force-yes openssh-server git screen gcc libxml2-dev libxslt1-dev tcpdump vim gcc make zlib1g-dev curl libssl-dev
 
     # sshd in ubuntu containers wont work on fedora, some selinux problem
     cd /tmp
