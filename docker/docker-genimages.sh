@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
 # Generates docker images of running ssh servers on various distros
+# Once done start your container like this
+# docker run -t -d derekh/fedora-20
+# Find its IP with docker-list-ips and ssh to it
 
 set -xue
 
